@@ -254,6 +254,115 @@ Bezahlung über Apple App Store und Google Play In-App Subscriptions.
 
 ---
 
+## Admin App (Flutter)
+
+### Voraussetzungen
+
+- Flutter SDK >= 3.2.0
+- Dart >= 3.2.0
+- iOS: Xcode 15+ (für iOS-Entwicklung)
+- Android: Android Studio mit SDK 33+ (für Android-Entwicklung)
+
+### Setup
+
+```bash
+cd apps/admin_app
+
+# Dependencies installieren
+flutter pub get
+
+# Code-Generierung (Models, Freezed, Riverpod)
+flutter pub run build_runner build --delete-conflicting-outputs
+```
+
+### Umgebungsvariablen
+
+Die Base URL wird via `--dart-define` gesetzt:
+
+```bash
+# Development
+flutter run --dart-define=BASE_URL=http://localhost
+
+# Production
+flutter run --dart-define=BASE_URL=https://your-production-domain.com
+```
+
+### Starten
+
+```bash
+# iOS Simulator
+flutter run -d ios --dart-define=BASE_URL=http://localhost
+
+# Android Emulator
+flutter run -d android --dart-define=BASE_URL=http://10.0.2.2
+
+# Web (optional)
+flutter run -d chrome --dart-define=BASE_URL=http://localhost
+```
+
+### Projektstruktur
+
+```
+apps/admin_app/
+├── lib/
+│   ├── main.dart                    # App-Einstiegspunkt
+│   ├── core/
+│   │   ├── config/                  # App-Konfiguration, ENV
+│   │   ├── networking/              # Dio Client, Interceptors, Exceptions
+│   │   ├── routing/                 # go_router Konfiguration
+│   │   └── theme/                   # Colors, Typography, Spacing, Shadows
+│   ├── shared/
+│   │   ├── models/                  # Datenmodelle (User, Restaurant, Menu, etc.)
+│   │   └── widgets/                 # Wiederverwendbare UI-Komponenten
+│   └── features/
+│       ├── splash/presentation/     # Splash Screen
+│       ├── auth/                    # Login, Register
+│       │   ├── data/               # AuthRepository
+│       │   └── presentation/       # Screens, Providers
+│       ├── home/                    # Dashboard, Recents
+│       │   ├── data/               # RecentsRepository (Hive)
+│       │   └── presentation/       # HomeScreen, Providers
+│       ├── scan/presentation/       # QR Scanner, Code-Eingabe
+│       ├── menu/                    # Menü-Anzeige
+│       │   ├── data/               # MenuRepository
+│       │   └── presentation/       # MenuScreen, DishDetail
+│       └── settings/presentation/   # Einstellungen
+├── docs/
+│   └── api_contract.md              # API-Dokumentation & Annahmen
+├── assets/                          # Bilder, Fonts
+├── pubspec.yaml
+└── analysis_options.yaml
+```
+
+### Tech Stack (Frontend)
+
+| Bereich | Technologie |
+|---------|-------------|
+| State Management | Riverpod |
+| Routing | go_router |
+| Networking | Dio + Interceptors |
+| Local Storage | Hive (Recents), flutter_secure_storage (Token) |
+| QR Scanner | mobile_scanner |
+| UI | Google Fonts (Inter), Shimmer |
+
+### API-Annahmen
+
+Die App nutzt die bestehende Backend-API (`/api/v1`). Alle Endpoints sind in `docs/api_contract.md` dokumentiert.
+
+**Wichtig:** Aktuell hat das Backend keine öffentlichen (unauthentifizierten) Endpoints für die Gast-Menüansicht via QR-Code. Die Gast-Menüs werden über Blade-Templates (Web) ausgeliefert. Sollte ein Public API Endpoint hinzugefügt werden, muss lediglich der `MenuRepository` angepasst werden.
+
+### Design
+
+- **Hintergrund:** Weiß (#FFFFFF / #F9FAFB), viel Whitespace
+- **Primary:** Indigo #4F46E5
+- **Accent:** Violet #7C3AED
+- **Positive:** Emerald #34D399
+- **CTA Gradient:** #4F46E5 → #7C3AED
+- **Typography:** Inter (Google Fonts)
+- **8px Grid System**, Card Radius 16, Button Radius 12
+
+---
+
 ## Status
 
 Projekt in Entwicklung.
