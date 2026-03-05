@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MenuSnap – Digitale QR-Speisekarten für Restaurants</title>
+    <link rel="icon" type="image/png" href="/images/logoNoName.png">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="bg-white text-gray-900 antialiased">
