@@ -16,8 +16,10 @@
             <p class="text-white/60 text-sm mt-2 max-w-xs mx-auto">{{ $restaurant->description }}</p>
         @endif
 
+        @if($table)
         <div class="inline-flex items-center gap-1.5 bg-white/10 border border-white/20 text-white/70 text-xs font-medium px-3 py-1 rounded-full mt-4 backdrop-blur-sm">
             {{ $table->label }}
         </div>
+        @endif
     </div>
 </header>

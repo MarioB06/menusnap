@@ -24,7 +24,7 @@
         {{-- Navbar mit Logo --}}
         <nav class="absolute top-0 left-0 right-0 flex items-center justify-between px-8 py-5 z-10">
             <img src="/images/logoWithName.png" alt="MenuSnap" class="h-10 w-auto" style="filter: brightness(0) invert(1);">
-            <a href="#"
+            <a href="{{ route('login') }}"
                class="bg-white/10 hover:bg-white/20 border border-white/20 text-white text-sm font-semibold px-4 py-2 rounded-lg backdrop-blur-sm transition-colors duration-150">
                 Anmelden
             </a>
@@ -59,7 +59,7 @@
 
             {{-- CTAs --}}
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="#"
+                <a href="{{ route('register') }}"
                    class="inline-block bg-white hover:bg-gray-100 text-indigo-700 font-semibold text-base px-8 py-3.5 rounded-xl shadow-lg transition-colors duration-150">
                     Kostenlos starten
                 </a>
@@ -173,7 +173,7 @@
             <p class="text-white/70 text-lg mb-8">
                 Starte noch heute kostenlos und bring deine Speisekarte ins digitale Zeitalter.
             </p>
-            <a href="#"
+            <a href="{{ route('register') }}"
                class="inline-block bg-white hover:bg-gray-100 text-indigo-700 font-semibold text-base px-10 py-4 rounded-xl shadow-lg transition-colors duration-150">
                 Jetzt kostenlos registrieren
             </a>
